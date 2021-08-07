@@ -3,5 +3,6 @@ from .views import *
 
 urlpatterns = [
     path('', UserListAPIView.as_view(), name="user-list"),
-    path('registr', RegistrationsAPIView.as_view(), name='Registrations')
+    path('registr', RegistrationsAPIView.as_view(), name='Registrations'),
+    path('<int:pk>', UserRetrieveUpdateDestroyAPIView.as_view(), name='user')
 ]

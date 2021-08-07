@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-g+@z4n@_jzdp2uch62flj8(yq-kuz+!1jbhz06au=*75ynv_-x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -39,11 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
-    'social_django',
-
     'rest_framework',
 
     'core',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -77,6 +76,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'silkroad.wsgi.application'
 
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+}
+
+AUTH_USER_MODEL = 'users.User'
+
+
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -92,6 +101,9 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
+
+
+
 
 
 # Password validation
@@ -137,4 +149,3 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-SITE_ID = 1

@@ -6,10 +6,20 @@ from django.contrib.auth import get_user_model
 from rest_framework.response import Response
 from rest_framework import status
 
+from rest_framework.generics import CreateAPIView
+# Подключаем компонент для прав доступа
+from rest_framework.permissions import AllowAny
+# Подключаем модель User
+from .models import User
+
 User = get_user_model()
 
 class UserListAPIView(ListCreateAPIView):
     serializer_class = UserSerializer
+    queryset = User.objects.all()
+
+class UserRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    serializers_class = UserSerializer
     queryset = User.objects.all()
 
 class RegistrationsAPIView(APIView):
